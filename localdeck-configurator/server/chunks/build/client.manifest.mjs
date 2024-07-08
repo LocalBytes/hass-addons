@@ -88,13 +88,13 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "CPDcQV2n.js",
+    "file": "cv-lpkvW.js",
     "name": "error-404",
     "src": "../../../node_modules/.pnpm/@nuxt+ui-templates@1.3.4/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_DWKOeoZV.js",
-      "_WFTSPike.js",
+      "_DYsV0z0Z.js",
+      "_Crjtm7nr.js",
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
     ],
     "css": [
@@ -112,12 +112,12 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "DBBpN990.js",
+    "file": "zX5C1HaX.js",
     "name": "error-500",
     "src": "../../../node_modules/.pnpm/@nuxt+ui-templates@1.3.4/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_WFTSPike.js",
+      "_Crjtm7nr.js",
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
     ],
     "css": [
@@ -141,7 +141,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BJF8kZ9b.js",
+    "file": "C81P8fV0.js",
     "name": "entry",
     "src": "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js",
     "isEntry": true,
@@ -268,7 +268,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BMlmL9JQ.js",
+    "file": "Z4CTr9lC.js",
     "name": "DeckIconPicker.client",
     "src": "../../localdeck-components/src/components/DeckIconPicker.client.vue",
     "isDynamicEntry": true,
@@ -300,23 +300,45 @@ const client_manifest = {
     "file": "PadCfg.o86-r2kq.css",
     "src": "_!~{00a}~.js"
   },
-  "_CAIfvWfc.js": {
+  "_Crjtm7nr.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "CAIfvWfc.js",
+    "file": "Crjtm7nr.js",
+    "name": "vue.f36acd1f",
+    "imports": [
+      "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
+    ]
+  },
+  "_DRfRYCxh.js": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "file": "DRfRYCxh.js",
     "name": "fetch",
     "imports": [
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
     ]
   },
-  "_CsMIMFB5.js": {
+  "_DYsV0z0Z.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "CsMIMFB5.js",
+    "file": "DYsV0z0Z.js",
+    "name": "nuxt-link",
+    "imports": [
+      "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
+    ]
+  },
+  "_zkfHOBJV.js": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "file": "zkfHOBJV.js",
     "name": "PadCfg",
     "imports": [
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
@@ -330,28 +352,6 @@ const client_manifest = {
     "resourceType": "style",
     "prefetch": true,
     "preload": true
-  },
-  "_DWKOeoZV.js": {
-    "resourceType": "script",
-    "module": true,
-    "prefetch": true,
-    "preload": true,
-    "file": "DWKOeoZV.js",
-    "name": "nuxt-link",
-    "imports": [
-      "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
-    ]
-  },
-  "_WFTSPike.js": {
-    "resourceType": "script",
-    "module": true,
-    "prefetch": true,
-    "preload": true,
-    "file": "WFTSPike.js",
-    "name": "vue.f36acd1f",
-    "imports": [
-      "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js"
-    ]
   },
   "assets/fonts/BabelStoneFlags.ttf": {
     "resourceType": "font",
@@ -376,15 +376,15 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "C1NZIC3G.js",
+    "file": "C5wwoUFG.js",
     "name": "editor",
     "src": "pages/editor.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_DWKOeoZV.js",
-      "_CsMIMFB5.js",
+      "_DYsV0z0Z.js",
+      "_zkfHOBJV.js",
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js",
-      "_CAIfvWfc.js"
+      "_DRfRYCxh.js"
     ],
     "dynamicImports": [
       "../../localdeck-components/src/components/DeckIconPicker.client.vue"
@@ -395,13 +395,13 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BcNCZtu8.js",
+    "file": "wJOSK_JU.js",
     "name": "index",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js",
-      "_CAIfvWfc.js"
+      "_DRfRYCxh.js"
     ]
   },
   "pages/print.vue": {
@@ -409,15 +409,15 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "C7KMOapL.js",
+    "file": "fT1K6KFU.js",
     "name": "print",
     "src": "pages/print.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_DWKOeoZV.js",
-      "_CsMIMFB5.js",
+      "_DYsV0z0Z.js",
+      "_zkfHOBJV.js",
       "../../../node_modules/.pnpm/nuxt@3.11.2_@opentelemetry+api@1.8.0_@parcel+watcher@2.4.1_@types+node@20.13.0_@unocss+reset@_hmketqrrn26q2scttemiuy64dm/node_modules/nuxt/dist/app/entry.js",
-      "_CAIfvWfc.js"
+      "_DRfRYCxh.js"
     ]
   }
 };

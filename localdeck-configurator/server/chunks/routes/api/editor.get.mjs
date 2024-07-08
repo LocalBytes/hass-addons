@@ -1,7 +1,7 @@
 import { d as defineEventHandler, u as useRuntimeConfig, g as getQuery } from '../../runtime.mjs';
 import * as fs from 'fs/promises';
 import _ from 'lodash';
-import { d as decompress } from '../../_/compression.mjs';
+import { d as decompress, n as newPadEditor } from '../../_/PadCfg.mjs';
 import 'node:http';
 import 'node:https';
 import 'fs';
@@ -9,6 +9,9 @@ import 'path';
 import 'node:fs';
 import 'node:url';
 import 'pako';
+import 'esphome-config-ts/dist/lib/index.js';
+import 'esphome-config-ts/dist/components/index.js';
+import 'esphome-config-ts/dist/yaml/index.js';
 
 const editor_get = defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
