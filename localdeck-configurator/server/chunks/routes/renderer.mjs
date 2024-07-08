@@ -1,11 +1,16 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'vue-bundle-renderer/runtime';
 import { u as useRuntimeConfig, e as eventHandler, s as setResponseHeader, a as send, b as getResponseStatus, f as setResponseStatus, h as useNitroApp, i as setResponseHeaders, j as joinRelativeURL, g as getQuery, c as createError, k as getRouteRules, l as getResponseStatusText } from '../runtime.mjs';
 import { stringify, uneval } from 'devalue';
-import { renderToString } from 'vue/server-renderer';
 import { propsToString, renderSSRHead } from '@unhead/ssr';
 import { createServerHead as createServerHead$1, CapoPlugin } from 'unhead';
 import { version, unref } from 'vue';
 import { defineHeadPlugin } from '@unhead/shared';
+import 'node:http';
+import 'node:https';
+import 'fs';
+import 'path';
+import 'node:fs';
+import 'node:url';
 
 function defineRenderHandler(handler) {
   const runtimeConfig = useRuntimeConfig();
@@ -108,9 +113,6 @@ const appTeleportAttrs = {"id":"teleports"};
 
 const componentIslands = false;
 
-function baseURL() {
-  return useRuntimeConfig().app.baseURL;
-}
 function buildAssetsDir() {
   return useRuntimeConfig().app.buildAssetsDir;
 }
@@ -126,35 +128,6 @@ function publicAssetsURL(...path) {
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
 const getClientManifest = () => import('../build/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getEntryIds = () => getClientManifest().then((r) => Object.values(r).filter(
-  (r2) => (
-    // @ts-expect-error internal key set by CSS inlining configuration
-    r2._globalCSS
-  )
-).map((r2) => r2.src));
-const getServerEntry = () => import('../build/server.mjs').then((r) => r.default || r);
-const getSSRStyles = lazyCachedFunction(() => import('../build/styles.mjs').then((r) => r.default || r));
-const getSSRRenderer = lazyCachedFunction(async () => {
-  const manifest = await getClientManifest();
-  if (!manifest) {
-    throw new Error("client.manifest is not available");
-  }
-  const createSSRApp = await getServerEntry();
-  if (!createSSRApp) {
-    throw new Error("Server bundle is not available");
-  }
-  const options = {
-    manifest,
-    renderToString: renderToString$1,
-    buildAssetsURL
-  };
-  const renderer = createRenderer(createSSRApp, options);
-  async function renderToString$1(input, context) {
-    const html = await renderToString(input, context);
-    return APP_ROOT_OPEN_TAG + html + APP_ROOT_CLOSE_TAG;
-  }
-  return renderer;
-});
 const getSPARenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   const spaTemplate = await import('../virtual/_virtual_spa-template.mjs').then((r) => r.template).catch(() => "").then((r) => APP_ROOT_OPEN_TAG + r + APP_ROOT_CLOSE_TAG);
@@ -222,7 +195,7 @@ const renderer = defineRenderHandler(async (event) => {
     url,
     event,
     runtimeConfig: useRuntimeConfig(event),
-    noSSR: event.context.nuxt?.noSSR || routeOptions.ssr === false && !isRenderingIsland || (false),
+    noSSR: !!true   ,
     head,
     error: !!ssrError,
     nuxt: void 0,
@@ -238,12 +211,7 @@ const renderer = defineRenderHandler(async (event) => {
     },
     islandContext
   };
-  const renderer = ssrContext.noSSR ? await getSPARenderer() : await getSSRRenderer();
-  {
-    for (const id of await getEntryIds()) {
-      ssrContext.modules.add(id);
-    }
-  }
+  const renderer = await getSPARenderer() ;
   const _rendered = await renderer.renderToString(ssrContext).catch(async (error) => {
     if (ssrContext._renderResponse && error.message === "skipping render") {
       return {};
@@ -263,7 +231,7 @@ const renderer = defineRenderHandler(async (event) => {
     const response2 = renderPayloadResponse(ssrContext);
     return response2;
   }
-  const inlinedStyles = await renderInlineStyles(ssrContext.modules ?? []) ;
+  const inlinedStyles = [];
   const NO_SCRIPTS = routeOptions.experimentalNoScripts;
   const { styles, scripts } = getRequestDependencies(ssrContext, renderer.rendererContext);
   head.push({ style: inlinedStyles });
@@ -358,18 +326,6 @@ function joinAttrs(chunks) {
 function renderHTMLDocument(html) {
   return `<!DOCTYPE html><html${joinAttrs(html.htmlAttrs)}><head>${joinTags(html.head)}</head><body${joinAttrs(html.bodyAttrs)}>${joinTags(html.bodyPrepend)}${joinTags(html.body)}${joinTags(html.bodyAppend)}</body></html>`;
 }
-async function renderInlineStyles(usedModules) {
-  const styleMap = await getSSRStyles();
-  const inlinedStyles = /* @__PURE__ */ new Set();
-  for (const mod of usedModules) {
-    if (mod in styleMap) {
-      for (const style of await styleMap[mod]()) {
-        inlinedStyles.add(style);
-      }
-    }
-  }
-  return Array.from(inlinedStyles).map((style) => ({ innerHTML: style }));
-}
 function renderPayloadResponse(ssrContext) {
   return {
     body: stringify(splitPayload(ssrContext).payload, ssrContext._payloadReducers) ,
@@ -387,7 +343,7 @@ function renderPayloadJsonScript(opts) {
     "type": "application/json",
     "id": opts.id,
     "innerHTML": contents,
-    "data-ssr": !(opts.ssrContext.noSSR)
+    "data-ssr": !(true )
   };
   if (opts.src) {
     payload["data-src"] = opts.src;
@@ -407,10 +363,5 @@ function splitPayload(ssrContext) {
   };
 }
 
-const renderer$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  default: renderer
-});
-
-export { buildAssetsURL as a, baseURL as b, renderer$1 as r };
+export { renderer as default };
 //# sourceMappingURL=renderer.mjs.map
