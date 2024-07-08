@@ -1,9 +1,9 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'vue-bundle-renderer/runtime';
-import { u as useRuntimeConfig, e as eventHandler, s as setResponseHeader, a as send, b as getResponseStatus, f as setResponseStatus, h as useNitroApp, i as setResponseHeaders, j as joinRelativeURL, g as getQuery, c as createError, k as getRouteRules, l as getResponseStatusText } from '../runtime.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'vue-bundle-renderer/runtime';
+import { e as eventHandler, s as setResponseHeader, a as send, b as getResponseStatus, f as setResponseStatus, h as useNitroApp, i as setResponseHeaders, j as joinRelativeURL, u as useRuntimeConfig, g as getQuery, c as createError, k as getRouteRules, l as getResponseStatusText } from '../runtime.mjs';
 import { stringify, uneval } from 'devalue';
-import { propsToString, renderSSRHead } from '@unhead/ssr';
-import { createServerHead as createServerHead$1, CapoPlugin } from 'unhead';
+import { renderSSRHead } from '@unhead/ssr';
 import { version, unref } from 'vue';
+import { createServerHead as createServerHead$1 } from 'unhead';
 import { defineHeadPlugin } from '@unhead/shared';
 import 'node:http';
 import 'node:https';
@@ -13,9 +13,8 @@ import 'node:fs';
 import 'node:url';
 
 function defineRenderHandler(handler) {
-  const runtimeConfig = useRuntimeConfig();
   return eventHandler(async (event) => {
-    if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
+    if (event.path.endsWith("/favicon.ico")) {
       setResponseHeader(event, "Content-Type", "image/x-icon");
       return send(
         event,
@@ -97,19 +96,17 @@ function createServerHead(options = {}) {
   return head;
 }
 
-const unheadPlugins = true ? [CapoPlugin({ track: true })] : [];
-
-const renderSSRHeadOptions = {};
+const unheadPlugins = [];
 
 const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[{"rel":"icon","type":"image/svg","href":"/favicon.svg"}],"style":[],"script":[],"noscript":[]};
 
-const appRootTag = "div";
+const appRootId = "__nuxt";
 
-const appRootAttrs = {"id":"__nuxt"};
+const appRootTag = "div";
 
 const appTeleportTag = "div";
 
-const appTeleportAttrs = {"id":"teleports"};
+const appTeleportId = "teleports";
 
 const componentIslands = false;
 
@@ -143,7 +140,11 @@ const getSPARenderer = lazyCachedFunction(async () => {
     const config = useRuntimeConfig(ssrContext.event);
     ssrContext.modules = ssrContext.modules || /* @__PURE__ */ new Set();
     ssrContext.payload = {
-      serverRendered: false
+      _errors: {},
+      serverRendered: false,
+      data: {},
+      state: {},
+      once: /* @__PURE__ */ new Set()
     };
     ssrContext.config = {
       public: config.public,
@@ -156,17 +157,16 @@ const getSPARenderer = lazyCachedFunction(async () => {
     renderToString
   };
 });
-const HAS_APP_TELEPORTS = !!(appTeleportAttrs.id);
-const APP_TELEPORT_OPEN_TAG = HAS_APP_TELEPORTS ? `<${appTeleportTag}${propsToString(appTeleportAttrs)}>` : "";
-const APP_TELEPORT_CLOSE_TAG = HAS_APP_TELEPORTS ? `</${appTeleportTag}>` : "";
-const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
+const APP_TELEPORT_OPEN_TAG = `<${appTeleportTag} id="${appTeleportId}">` ;
+const APP_TELEPORT_CLOSE_TAG = `</${appTeleportTag}>` ;
+const APP_ROOT_OPEN_TAG = `<${appRootTag}${` id="${appRootId}"` }>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
 const PAYLOAD_URL_RE = /\/_payload.json(\?.*)?$/ ;
 const renderer = defineRenderHandler(async (event) => {
   const nitroApp = useNitroApp();
   const ssrError = event.path.startsWith("/__nuxt_error") ? getQuery(event) : null;
   if (ssrError && ssrError.statusCode) {
-    ssrError.statusCode = Number.parseInt(ssrError.statusCode);
+    ssrError.statusCode = parseInt(ssrError.statusCode);
   }
   if (ssrError && !("__unenv__" in event.node.req)) {
     throw createError({
@@ -267,23 +267,20 @@ const renderer = defineRenderHandler(async (event) => {
         type: resource.module ? "module" : null,
         src: renderer.rendererContext.buildAssetsURL(resource.file),
         defer: resource.module ? null : true,
-        // if we are rendering script tag payloads that import an async payload
-        // we need to ensure this resolves before executing the Nuxt entry
-        tagPosition: "head",
         crossorigin: ""
       }))
     }, headEntryOptions);
   }
-  const { headTags, bodyTags, bodyTagsOpen, htmlAttrs, bodyAttrs } = await renderSSRHead(head, renderSSRHeadOptions);
+  const { headTags, bodyTags, bodyTagsOpen, htmlAttrs, bodyAttrs } = await renderSSRHead(head);
   const htmlContext = {
     island: isRenderingIsland,
     htmlAttrs: htmlAttrs ? [htmlAttrs] : [],
-    head: normalizeChunks([headTags]),
+    head: normalizeChunks([headTags, ssrContext.styles]),
     bodyAttrs: bodyAttrs ? [bodyAttrs] : [],
     bodyPrepend: normalizeChunks([bodyTagsOpen, ssrContext.teleports?.body]),
     body: [
       _rendered.html,
-      APP_TELEPORT_OPEN_TAG + (HAS_APP_TELEPORTS ? joinTags([ssrContext.teleports?.[`#${appTeleportAttrs.id}`]]) : "") + APP_TELEPORT_CLOSE_TAG
+      APP_TELEPORT_OPEN_TAG + (joinTags([ssrContext.teleports?.[`#${appTeleportId}`]]) ) + APP_TELEPORT_CLOSE_TAG
     ],
     bodyAppend: [bodyTags]
   };
@@ -340,9 +337,9 @@ function renderPayloadResponse(ssrContext) {
 function renderPayloadJsonScript(opts) {
   const contents = opts.data ? stringify(opts.data, opts.ssrContext._payloadReducers) : "";
   const payload = {
-    "type": "application/json",
-    "id": opts.id,
-    "innerHTML": contents,
+    type: "application/json",
+    id: opts.id,
+    innerHTML: contents,
     "data-ssr": !(true )
   };
   if (opts.src) {
