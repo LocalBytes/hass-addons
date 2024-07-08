@@ -1,0 +1,32 @@
+{
+  "name": "nitro-output",
+  "version": "0.0.0",
+  "private": true,
+  "bundledDependencies": [
+    "@babel/parser",
+    "@unhead/dom",
+    "@unhead/shared",
+    "@unhead/ssr",
+    "@vue/compiler-core",
+    "@vue/compiler-dom",
+    "@vue/compiler-ssr",
+    "@vue/reactivity",
+    "@vue/runtime-core",
+    "@vue/runtime-dom",
+    "@vue/server-renderer",
+    "@vue/shared",
+    "devalue",
+    "entities",
+    "esphome-config-ts",
+    "estree-walker",
+    "hookable",
+    "js-yaml",
+    "lodash",
+    "pako",
+    "source-map-js",
+    "ufo",
+    "unhead",
+    "vue",
+    "vue-bundle-renderer"
+  ]
+}
