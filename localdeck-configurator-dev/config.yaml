@@ -4,7 +4,7 @@ slug: "localdeck-configurator-dev"
 panel_icon: "mdi:dialpad"
 
 image: ghcr.io/localbytes/hass-localdeck-configurator-{arch}
-version: 0.6-9-gf299b44
+version: 0.6-21-ge5de069
 arch: [ aarch64, amd64, armhf, armv7, i386 ]
 init: false
 
