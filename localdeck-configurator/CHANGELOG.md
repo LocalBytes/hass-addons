@@ -1,16 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.7...main)
-
-## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
-
-### Added
-- Fuzzy searching for entities in #43
-- Increased performance when opening large files by only reading the first part of the config where possible in #51
-
-### Fixed
-- Dependency updates
-- Compatability for ESPHome 2025.1 where the RMT channel was removed in #54
+## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.6...main)
 
 ## [v0.6](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.6)
 
