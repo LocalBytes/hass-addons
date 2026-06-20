@@ -3,9 +3,9 @@ description: "Configure your LocalBytes LocalDeck with ease!"
 slug: "localdeck-configurator-dev"
 panel_icon: "mdi:dialpad"
 
-image: ghcr.io/localbytes/hass-localdeck-configurator-{arch}
-version: 0.7.1-152-g89dcd12
-arch: [ aarch64, amd64, armhf, armv7, i386 ]
+image: ghcr.io/localbytes/hass-localdeck-configurator
+version: 0.7.1-154-g6c1cd2f
+arch: [ aarch64, amd64 ]
 init: false
 
 schema:
