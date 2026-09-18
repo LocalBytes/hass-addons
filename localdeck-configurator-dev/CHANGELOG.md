@@ -2,24 +2,35 @@
 
 ## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.7...main)
 
+### Added
+
+- Introduced `LB_*` environment variables for configurator configuration, with a `bashio` fallback and a deprecation warning for the old `NUXT_*` vars. Refs #22
+
 ### Changed
+
 - Major update to dependencies including Nuxt 4 in b43e45e
 - Upgraded to Vite 8 and Vitest 4; e2e tests now share a single dev server, reducing test time significantly in #155
 - Moved from RippleUI to DaisyUI for the UI components in b43e45e
 
 ### Fixed
+
+- Files are now directly navigable, links to a specific file (and refreshing while on one) open that file instead of falling back to the file list.
 - LED state is now restored after a button press (blip animation no longer leaves the light off) in #144. See: #61, [forum#285:7](https://forum.mylocalbytes.com/d/285/7)
 - Button LEDs now correctly reflect colour and brightness from Home Assistant entities in #144
 - Suppressed a spurious boot warning for the LED strip pin in #144
-- Fixed provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
+- Fixed the provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
+- Very short button presses now reliably reach Home Assistant in #163
+- Migrated to ESPHome's renamed `homeassistant.action` (from `.service`) and fixed a toggle action silently never firing in #173
 
 ## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
 
 ### Added
+
 - Fuzzy searching for entities in #43
 - Increased performance when opening large files by only reading the first part of the config where possible in #51
 
 ### Fixed
+
 - Dependency updates
 - Compatability for ESPHome 2025.1 where the RMT channel was removed in #54
 
