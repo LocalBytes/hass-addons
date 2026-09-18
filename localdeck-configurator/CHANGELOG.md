@@ -1,6 +1,41 @@
 # Changelog
 
-## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.6...main)
+## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.8...main)
+
+## [v0.8](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.8)
+
+### Changed
+
+- Replaced the previously-undocumented `NUXT_*` environment variables with `LB_*` ones, with a deprecation warning for the old vars. Refs #22
+- Major update to dependencies including Nuxt 4 in b43e45e
+- Upgraded to Vite 8 and Vitest 4; e2e tests now share a single dev server, reducing test time significantly in #155
+- Moved from RippleUI to DaisyUI for the UI components in b43e45e
+- Compatibility for ESPHome 2026.09 in e366bdf
+- The icon picker now opens instantly instead of blocking on ~5000 emoji/icon nodes in 98fdf5e, d2eedb1
+
+### Fixed
+
+- Files are now directly navigable, links to a specific file (and refreshing while on one) open that file instead of falling back to the file list.
+- LED state is now restored after a button press (blip animation no longer leaves the light off) in #144. See: #61, [forum#285:7](https://forum.mylocalbytes.com/d/285/7)
+- Button LEDs now correctly reflect colour and brightness from Home Assistant entities in #144
+- Suppressed a spurious boot warning for the LED strip pin in #144
+- Fixed the provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
+- Very short button presses now reliably reach Home Assistant in #163
+- Migrated to ESPHome's renamed `homeassistant.action` (from `.service`) and fixed a toggle action silently never firing in #173
+- Buttons are now force-updated after at least one `batch_delay` cycle, so presses are no longer dropped in 4905f48
+- Button numbers are now sorted numerically rather than lexicographically when generating config in d16e0be
+
+## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
+
+### Added
+
+- Fuzzy searching for entities in #43
+- Increased performance when opening large files by only reading the first part of the config where possible in #51
+
+### Fixed
+
+- Dependency updates
+- Compatability for ESPHome 2025.1 where the RMT channel was removed in #54
 
 ## [v0.6](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.6)
 
